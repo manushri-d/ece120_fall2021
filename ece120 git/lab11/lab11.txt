@@ -1,0 +1,22 @@
+Question 1: Describe the errors that occur when trying to assemble lab11.asm. Identify the cause of each error.
+"Illegal operands for missing opcode" In STI, there has to be a pointer to RESULT, not xxxx
+"Instruction appears before .ORIG" There is no .ORIG for x3000, so I had to write it in
+"Constant outside of allowed range" Change x3010 to point to -1
+"Illegal operands for ADD" There are two commas for ADD R3,,R3,R2. It should be ADD R3,R3,R2
+"Constant outside of allowed range" Change x300F to point to 0
+"Label OUTERLOOP has already appeared" BRpz should be written as BRzp
+"No .END directive found" There is no .END directive, so I had to write it in
+
+
+Question 2: For each label in the code, write down the corresponding memory location. 
+OUTERLOOP: x3005
+INNERLOOP: x3006
+INPUT: x300F
+INIT: x3010
+DECREMENT: x3011
+RESULT: x3012  
+
+
+Question 3: Between using labels and explicit memory locations/offsets, which one makes the most sense, and why?
+Labels makes the most sense, because it is easier to debug. 
+The labels have a certain value in hexadecimal that then can be used with lc3 to point to explicit memory locations. 

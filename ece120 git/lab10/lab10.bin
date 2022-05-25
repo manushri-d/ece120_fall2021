@@ -1,0 +1,37 @@
+; This is the file you will use for the lab assignment
+; Make sure to comment your code properly and don't exceed 
+; the line limitation for this assignment.  Good luck!
+
+0011 0001 0000 0000 ; x3100 - starting address of the program
+
+; The program description and code starts here
+
+; Manushri Dilipkumar, November 11, 2021
+; This program adds positive numbers and stores it in a register.
+; I used a register to temporarily hold the value stored in the register to check if the value is negative
+; I then use a loop to go to the next value if the value is negative.
+; I use another loop to keep going to the next value if the counter is not zero.
+; R3 is a register used as a pointer
+; R4 is used as a counter
+; R5 holds the final sum
+; R2 is a register used to temporarily store the pointer value
+
+0101 011 011 1 00000	; R3 <- 0		Clears R3
+0101 100 100 1 00000	; R4 <- 0		Clears R4
+0101 101 101 1 00000	; R5 <- 0		Clears R5
+0001 100 100 1 01010	; R4 <- R4 + #10	Add 10 to R4
+1110 011 0 0010 1101	; R3 <- x3105 + #45	Stores the address x3132 in R3
+0101 010 010 1 00000	; R2 <- 0		Clears R2
+0110 010 011 000000	; R2 <- R3 		Set R2 to the value in R3
+0001 010 010 1 00000	; R2 <- R2 + #0		Check if value is negative
+0000 100 000000001	; BRn x3107 + x0001		Loops to x310B
+0001 101 101 000 010	; R5 <- R5 + R2		Adds the positive value to R5
+0001 011 011 1 00001	; R3 <- R3 + #1		Add R3 by 1 to go to the next memory
+0001 010 010 1 11111	; R4 <- R4 + #(-1)	Add R4 by -1 to decrease the counter(to stop at 0 from 10)
+0001 010 010 1 00000	; R4 <- R4 + #0		Check if value is zero
+0000 001 111111000	; BRp x310E + xFFF7	If value is not zero, loop back to x3106
+1111 0000 0010 0101	; HALT			Stops the program
+
+
+
+
